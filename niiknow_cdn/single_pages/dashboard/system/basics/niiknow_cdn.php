@@ -28,12 +28,12 @@ td { padding-left: 5px !important;}
                     </td>
                 </tr>
                 <tr valign="top">
-                    <th scope="row"><label for="CDN_INCLUDE_FOLDERS">Include folders</label></th>
+                    <th scope="row"><label for="CDN_INCLUDE_PATH">Include path prefixes</label></th>
                     <td>
 <?php
-echo $form->text('CDN_INCLUDE_FOLDERS', $CDN_INCLUDE_FOLDERS, array('class' => '', 'size' => '64'));
+echo $form->text('CDN_INCLUDE_PATH', $CDN_INCLUDE_PATH, array('class' => '', 'size' => '64'));
 ?>
-                        <span class="description">Folders to include in static file matching.
+                        <span class="description">Path prefixes to include in static file matching.
                         Use a comma as the delimiter.
                         Trailing <code>/</code> OK, but do not prefix with <code>/</code> please.</span><br/><br/><br/>
                     </td>

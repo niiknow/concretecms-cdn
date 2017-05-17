@@ -13,7 +13,7 @@ class NiiknowCdn extends DashboardPageController
         $pkg = Package::getByHandle('niiknow_cdn');
         $this->set('CDN_ENABLED', $pkg->isEnabled());
         $this->set('CDN_OFFSITE_URL', $pkg->getOffsiteUrl());
-        $this->set('CDN_INCLUDE_FOLDERS', str_replace('|', ', ', $pkg->getIncludeFolders()));
+        $this->set('CDN_INCLUDE_PATH', str_replace('|', ', ', $pkg->getIncludePath()));
         $this->set('CDN_EXCLUDE_SUBSTRINGS', str_replace('|', ', ', $pkg->getExcludeSubstrings()));
         $this->set('SITE_URL', $pkg->getSiteUrl());
     }
@@ -29,7 +29,7 @@ class NiiknowCdn extends DashboardPageController
         $pkg = Package::getByHandle('niiknow_cdn');
         $pkg->setEnabled($this->post('CDN_ENABLED'));
         $pkg->setOffsiteUrl($this->post('CDN_OFFSITE_URL'));
-        $pkg->setIncludeFolders($this->post('CDN_INCLUDE_FOLDERS'));
+        $pkg->setIncludePath($this->post('CDN_INCLUDE_PATH'));
         $pkg->setExcludeSubstrings($this->post('CDN_EXCLUDE_SUBSTRINGS'));
         $this->redirect('/dashboard/system/basics/niiknow_cdn/success');
     }

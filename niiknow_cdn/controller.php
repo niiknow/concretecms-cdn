@@ -27,32 +27,32 @@ class Controller extends Package
 
     public function isEnabled()
     {
-        return $this->getConfig()->get('niiknow_cdn . enabled') == 1 ? true : false;
+        return $this->getConfig()->get('niiknow_cdn.enabled') == 1 ? true : false;
     }
 
     public function setEnabled($enabled = false)
     {
-        $this->getConfig()->save('niiknow_cdn . enabled', $enabled ? 1 : 0);
+        $this->getConfig()->save('niiknow_cdn.enabled', $enabled ? 1 : 0);
     }
 
     public function getOffsiteUrl()
     {
-        return $this->getConfig()->get('niiknow_cdn . offsite_url');
+        return $this->getConfig()->get('niiknow_cdn.offsite_url');
     }
 
-    public function setOffsiteUrl($arg1 = 'http: //your.cdn-url.com')
+    public function setOffsiteUrl($arg1 = 'http://your.cdn-url.com')
     {
         $this->getConfig()->save('niiknow_cdn.offsite_url', preg_replace('/[\s\/]*$/', '', $arg1));
     }
 
-    public function getIncludeFolders()
+    public function getIncludePath()
     {
-        return $this->getConfig()->get('niiknow_cdn.include_substring');
+        return $this->getConfig()->get('niiknow_cdn.include_path');
     }
 
-    public function setIncludeFolders($arg1 = 'application/files/,concrete/,fundamental/,download_file/,packages/')
+    public function setIncludePath($arg1 = 'application/files/,concrete/,fundamental/,download_file/,packages/')
     {
-        $this->getConfig()->save('niiknow_cdn.include_substring',
+        $this->getConfig()->save('niiknow_cdn.include_path',
             str_replace(',', '|', preg_replace('/\s*/', '', $arg1)));
     }
 
@@ -79,7 +79,7 @@ class Controller extends Package
         // init default values
         $this->setEnabled();
         $this->setOffsiteUrl();
-        $this->setIncludeFolders();
+        $this->setIncludePath();
         $this->setExcludeSubstrings();
 
         $single_page = SinglePage::add('/dashboard/system/basics/niiknow_cdn', $pkg);
@@ -111,12 +111,12 @@ class Controller extends Package
                 $contents = preg_replace($baseUrlReg, " $1=$2/", $contents);
 
                 // 2. replace "/ with CDN URL
-                $includeFolders = $that->getIncludeFolders();
-                if ($includeFolders) {
-                    $includeFolders = str_replace('/', '\/', $includeFolders);
+                $includePath = $that->getIncludePath();
+                if ($includePath) {
+                    $includePath = str_replace('/', '\/', $includePath);
 
-                    $cdnUrlReg = '/\s+(href|src)\=([\"\'])\/(' . $includeFolders . ')/umi';
-                    $contents  = preg_replace($cdnUrlReg, " $1=$2__CDNURL__/$3", $contents);
+                    $cdnUrlReg = '/\s+(href|src)\=([\"\'])\/(' . $includePath . ')/umi';
+                    $contents  = preg_replace($cdnUrlReg, " $1=$2__CDNURL__/$3", $includePath);
 
                     // 3. replace excluded back to just relative URL
                     $excludeSubstrings = $that->getExcludeSubstrings();
