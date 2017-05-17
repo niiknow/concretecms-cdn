@@ -12,8 +12,8 @@ use Permissions;
 class Controller extends Package
 {
     protected $pkgHandle          = 'niiknow_cdn';
-    protected $appVersionRequired = '5.7';
-    protected $pkgVersion         = '0.1.0';
+    protected $appVersionRequired = '5.7.0.4';
+    protected $pkgVersion         = '0.1.1';
 
     public function getPackageDescription()
     {
