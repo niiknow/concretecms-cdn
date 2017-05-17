@@ -82,11 +82,11 @@ class Controller extends Package
         $this->setIncludePath();
         $this->setExcludeSubstrings();
 
-        $single_page = SinglePage::add('/dashboard/system/basics/niiknow_cdn', $pkg);
+        $single_page = SinglePage::add('/dashboard/system/basics/niiknowcdn', $pkg);
         $single_page->update(array('cName' => t('CDN Settings'), 'cDescription' => t('CDN Settings')));
     }
 
-    public function onStart()
+    public function on_start()
     {
         Events::addListener('on_page_output', function ($event) {
             $cp = new Permissions(Page::getCurrentPage());
@@ -110,21 +110,21 @@ class Controller extends Package
                 // 1. replace full URL with /
                 $contents = preg_replace($baseUrlReg, " $1=$2/", $contents);
 
-                // 2. replace "/ with CDN URL
-                $includePath = $that->getIncludePath();
-                if ($includePath) {
-                    $includePath = str_replace('/', '\/', $includePath);
+               // 2. replace "/ with CDN URL
+                $includeFolders = $that->getIncludePath();
+                if ($includeFolders) {
+                    $includeFolders = str_replace('/', '\/', $includeFolders);
 
-                    $cdnUrlReg = '/\s+(href|src)\=([\"\'])\/(' . $includePath . ')/umi';
-                    $contents  = preg_replace($cdnUrlReg, " $1=$2__CDNURL__/$3", $includePath);
+                    $cdnUrlReg = '/\s+(href|src)\=([\"\'])\/('.$includeFolders.')/umi';
+                    $contents = preg_replace($cdnUrlReg, " $1=$2__CDNURL__/$3", $contents);
 
                     // 3. replace excluded back to just relative URL
                     $excludeSubstrings = $that->getExcludeSubstrings();
                     if ($excludeSubstrings) {
                         $excludeSubstrings = str_replace('/', '\/', $excludeSubstrings);
 
-                        $cdnUrlReg = '/\s+(href|src)\=([\"\'])(__CDNURL__)\/.*(' . $excludeSubstrings . ')/umi';
-                        $contents  = preg_replace($cdnUrlReg, " $1=$2/$4", $contents);
+                        $cdnUrlReg = '/\s+(href|src)\=([\"\'])(__CDNURL__)\/.*('.$excludeSubstrings.')/umi';
+                        $contents = preg_replace($cdnUrlReg, " $1=$2/$4", $contents);
                     }
                 }
 

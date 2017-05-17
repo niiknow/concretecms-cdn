@@ -2,7 +2,7 @@
 $form   = \Core::make('helper/form');
 $ui     = \Core::make('helper/concrete/ui');
 $dash   = \Core::make('helper/concrete/dashboard');
-$action = $this->action('save_settings');
+$action = $this->action('saveSettings');
 ?>
 <style>
 td { padding-left: 5px !important;}

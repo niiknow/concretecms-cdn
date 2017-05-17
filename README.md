@@ -3,7 +3,7 @@ Concrete5.7+ CDN plugin.
 
 # build/package
 ```
-zip -r niiknow_cdn.zip niiknow_cdn/
+rm -f niiknow_cdn.zip | zip -r niiknow_cdn.zip niiknow_cdn/
 ```
 
 # Disclaimer

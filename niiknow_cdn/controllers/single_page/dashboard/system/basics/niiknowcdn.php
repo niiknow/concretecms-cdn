@@ -31,6 +31,6 @@ class NiiknowCdn extends DashboardPageController
         $pkg->setOffsiteUrl($this->post('CDN_OFFSITE_URL'));
         $pkg->setIncludePath($this->post('CDN_INCLUDE_PATH'));
         $pkg->setExcludeSubstrings($this->post('CDN_EXCLUDE_SUBSTRINGS'));
-        $this->redirect('/dashboard/system/basics/niiknow_cdn/success');
+        $this->redirect('/dashboard/system/basics/niiknowcdn/success');
     }
 }
