@@ -1,5 +1,5 @@
 {
-    "name": "niiknow/c5-cdn",
+    "name": "niiknow/c5-NiiknowCdn",
     "description": "Concrete5.7+ CDN plugin",
     "type": "project",
     "minimum-stability": "dev",
