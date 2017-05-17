@@ -15,7 +15,7 @@ class Niiknowcdn extends DashboardPageController
         $this->set( 'CDN_ENABLED', $pkg->isEnabled() );
         $this->set( 'CDN_OFFSITE_URL', $pkg->getOffsiteUrl() );
         $this->set( 'CDN_INCLUDE_FOLDERS', $pkg->getIncludeFolders() );
-        $this->set( 'CDN_EXCLUDE_STRINGS', $pkg->getExcludeStrings() );
+        $this->set( 'CDN_EXCLUDE_SUBSTRINGS', $pkg->getExcludeSubstrings() );
     }
 
     function success()
@@ -30,7 +30,7 @@ class Niiknowcdn extends DashboardPageController
         $pkg->setEnabled($this->post('CDN_ENABLED'));
         $pkg->setOffsiteUrl($this->post('CDN_OFFSITE_URL'));
         $pkg->setIncludeFolders($this->post('CDN_INCLUDE_FOLDERS'));
-        $pkg->setExcludeStrings($this->post('CDN_EXCLUDE_STRINGS'));
+        $pkg->setExcludeSubstrings($this->post('CDN_EXCLUDE_SUBSTRINGS'));
         $this->redirect('/dashboard/system/basics/niiknowcdn/success');
     }
 }

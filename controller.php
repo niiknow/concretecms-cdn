@@ -3,6 +3,8 @@
 namespace Concrete\Package\Niiknowcdn;
 
 use Concrete\Core\Package\Package;
+use Concrete\Core\Support\Facade\Events;
+use \Concrete\Core\Page\Single as SinglePage;
 
 defined('C5_EXECUTE') or die("Access Denied.");
 
@@ -37,9 +39,6 @@ class Controller extends Package
     public function install() {
         $pkg = parent::install();
         
-        //install block     
-        BlockType::installBlockTypeFromPackage('niiknowcdn', $pkg);
-        
         //init
         $this->setEnabled();
         $this->setOffsiteUrl();
@@ -52,10 +51,10 @@ class Controller extends Package
 
     public function on_start()
     {
-        $that = $this;
+        Events::addListener('on_page_output', function() use ($renderer, $bar) {
+$that = Package::getByHandle('niiknowcdn');
         $baseUrl = BASE_URL;
         $baseUrlParts = parse_url($baseUrl);
-        Events::addListener('on_page_output', function() use ($renderer, $bar) {
             if ($that->isEnabled()) {
                 $site_domain = $baseUrlParts["host"];
                 $baseUrlReg = "/\s+(href|src)\=([\"\'])(http|https)?:\/\/($site_domain)\//ugmi";
@@ -94,5 +93,6 @@ class Controller extends Package
                 $event->setArgument('contents', $contents);
             }
         });
+
     }
 }
