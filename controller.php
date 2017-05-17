@@ -1,6 +1,6 @@
 <?php
 
-namespace Concrete\Package\NiiknowCdn;
+namespace Concrete\Package\Niiknowcdn;
 
 use Concrete\Core\Package\Package;
 
