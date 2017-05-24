@@ -15,6 +15,9 @@ class NiiknowCdn extends DashboardPageController
         $this->set('CDN_OFFSITE_URL', $pkg->getOffsiteUrl());
         $this->set('CDN_INCLUDE_PATH', str_replace('|', ', ', $pkg->getIncludePath()));
         $this->set('CDN_EXCLUDE_SUBSTRINGS', str_replace('|', ', ', $pkg->getExcludeSubstrings()));
+        $this->set('CDN_MINIFY_HTML', $pkg->minifyHtml());
+
+        // output current site base url for use in UI
         $this->set('SITE_URL', $pkg->getSiteUrl());
     }
 
@@ -31,6 +34,9 @@ class NiiknowCdn extends DashboardPageController
         $pkg->setOffsiteUrl($this->post('CDN_OFFSITE_URL'));
         $pkg->setIncludePath($this->post('CDN_INCLUDE_PATH'));
         $pkg->setExcludeSubstrings($this->post('CDN_EXCLUDE_SUBSTRINGS'));
+        $pkg->setMinifyHtml($this->post('CDN_MINIFY_HTML'));
+
+        // redirec to success message
         $this->redirect('/dashboard/system/basics/niiknowcdn/success');
     }
 }
