@@ -104,14 +104,14 @@ class Controller extends Package
      * https://gist.github.com/Rodrigo54/93169db48194d470188f
      * -----------------------------------------------------------------------------------------
      */
-    public function minify_html($input) {
+    public function doHtmlMinify($input) {
         if(trim($input) === "") return $input;
 
         // Remove extra white-space(s) between HTML attribute(s)
         $input = preg_replace_callback('#<([^\/\s<>!]+)(?:\s+([^<>]*?)\s*|\s*)(\/?)>#s', function($matches) {
             return '<' . $matches[1] . preg_replace('#([^\s=]+)(\=([\'"]?)(.*?)\3)?(\s+|$)#s', ' $1$2', $matches[2]) . $matches[3] . '>';
         }, str_replace("\r", "", $input));
-        
+
         // Minify inline CSS declaration(s)
         if(strpos($input, ' style=') !== false) {
             $input = preg_replace_callback('#<([^<]+?)\s+style=([\'"])(.*?)\2(?=[\/\s>])#s', function($matches) {
@@ -212,8 +212,8 @@ class Controller extends Package
                 $contents = str_replace('__CDNURL__', $cdnUrl, $contents);
 
                 // minify html
-                if ($this->minifyHtml()) {
-                    $contents = minify_html($contents);
+                if ($that->minifyHtml()) {
+                    $contents = $that->doHtmlMinify($contents);
                 }
 
                 // output signature
