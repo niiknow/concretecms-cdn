@@ -1,5 +1,5 @@
 <?php
-namespace Concrete\Package\NiiknowCdn\Controller\SinglePage\Dashboard\System\Basics;
+namespace Concrete\Package\NiiknowCdn\Controller\SinglePage\Dashboard\System\Optimization;
 
 defined('C5_EXECUTE') or die(_("Access Denied."));
 
@@ -37,6 +37,6 @@ class NiiknowCdn extends DashboardPageController
         $pkg->setMinifyHtml($this->post('CDN_MINIFY_HTML'));
 
         // redirec to success message
-        $this->redirect('/dashboard/system/basics/niiknowcdn/success');
+        $this->redirect('/dashboard/system/optimization/niiknowcdn/success');
     }
 }

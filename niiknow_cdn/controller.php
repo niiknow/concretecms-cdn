@@ -94,7 +94,7 @@ class Controller extends Package
         $this->setExcludeSubstrings();
         $this->setMinifyHtml();
 
-        $single_page = SinglePage::add('/dashboard/system/basics/niiknowcdn', $pkg);
+        $single_page = SinglePage::add('/dashboard/system/optimization/niiknowcdn', $pkg);
         $single_page->update(array('cName' => t('CDN Settings'), 'cDescription' => t('CDN Settings')));
     }
 
