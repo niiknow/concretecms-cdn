@@ -23,7 +23,7 @@ class NiiknowCdn extends DashboardPageController
 
     public function success()
     {
-        $this->set('success', t('Configuration updated'));
+        $this->set('success', t('Configuration updated.'));
         $this->view();
     }
 
@@ -36,7 +36,7 @@ class NiiknowCdn extends DashboardPageController
         $pkg->setExcludeSubstrings($this->post('CDN_EXCLUDE_SUBSTRINGS'));
         $pkg->setMinifyHtml($this->post('CDN_MINIFY_HTML'));
 
-        // redirec to success message
+        // redirect to success message
         $this->redirect('/dashboard/system/optimization/niiknowcdn/success');
     }
 }

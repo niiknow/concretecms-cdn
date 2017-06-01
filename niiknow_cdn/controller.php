@@ -7,13 +7,14 @@ use Concrete\Core\Package\Package;
 use Concrete\Core\Page\Page as Page;
 use Concrete\Core\Page\Single as SinglePage;
 use Concrete\Core\Support\Facade\Events;
+use Concrete\Core\Support\Facade\Facade;
 use Permissions;
 
 class Controller extends Package
 {
     protected $pkgHandle          = 'niiknow_cdn';
     protected $appVersionRequired = '5.7.0.4';
-    protected $pkgVersion         = '0.1.2';
+    protected $pkgVersion         = '0.1.3';
 
     public function getPackageDescription()
     {
@@ -80,11 +81,10 @@ class Controller extends Package
 
     public function getSiteUrl()
     {
-        // build base url from server info and REL_DIR
-        $base_uri = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]/" . REL_DIR_APPLICATION;
-
-        // trim any trailing slash or spaces
-        return preg_replace('/[\s\/]*$/', '', $base_uri);
+       
+        $app = Facade::getFacadeApplication();
+        $base_uri = $app->make('url/canonical');
+        return $base_uri;
     }
 
     public function install()
