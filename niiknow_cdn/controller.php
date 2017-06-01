@@ -80,7 +80,11 @@ class Controller extends Package
 
     public function getSiteUrl()
     {
-        return (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+        // build base url from server info and REL_DIR
+        $base_uri = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]/" . REL_DIR_APPLICATION;
+
+        // trim any trailing slash or spaces
+        return preg_replace('/[\s\/]*$/', '', $base_uri);
     }
 
     public function install()
