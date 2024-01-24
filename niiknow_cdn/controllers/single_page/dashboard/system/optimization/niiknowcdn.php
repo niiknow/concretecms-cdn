@@ -8,6 +8,11 @@ use \Concrete\Core\Page\Controller\DashboardPageController;
 
 class NiiknowCdn extends DashboardPageController
 {
+    /**
+     * @var string[]
+     */
+    public $helpers = ['form'];
+
     public function view()
     {
         $pkg = Package::getByHandle('niiknow_cdn');

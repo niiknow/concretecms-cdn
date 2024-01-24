@@ -4,8 +4,11 @@
     "type": "project",
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "require-dev": {
+    },
     "require": {
-        "php" : "^5.5 || ^7.0"
+        "php" : ">=8",
+        "humbug/php-scoper": "^0.17.5"
     },
     "license": "MIT",
     "authors": [
@@ -13,5 +16,18 @@
             "name": "noogen",
             "email": "friends@noogen.net"
         }
-    ]
+    ],
+    "scripts": {
+        "phpcs": "phpcs -s --report=full --report=source",
+        "phpcs:fix": "phpcbf -w",
+        "format": "./vendor/bin/php-cs-fixer fix --using-cache=no",
+        "scope-dependencies": [
+          "@php vendor/bin/php-scoper add-prefix --config=.scoper.inc.php --output-dir=niiknow_cdn/vendor --force --quiet"
+        ],
+        "app:package": [
+          "@composer install --no-dev --optimize-autoloader",
+          "@composer scope-dependencies",
+          "composer archive --working-dir=niiknow_cdn/"
+        ]
+    }
 }

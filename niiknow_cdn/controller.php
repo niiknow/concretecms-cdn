@@ -13,8 +13,8 @@ use Permissions;
 class Controller extends Package
 {
     protected $pkgHandle          = 'niiknow_cdn';
-    protected $appVersionRequired = '5.7.0.4';
-    protected $pkgVersion         = '0.1.3';
+    protected $appVersionRequired = '9.2.0';
+    protected $pkgVersion         = '0.2.0';
 
     public function getPackageDescription()
     {
@@ -234,6 +234,8 @@ class Controller extends Package
 
     public function on_start()
     {
+        // require_once(__DIR__ . '/vendor/autoload.php');
+
         Events::addListener('on_page_output', function ($event) {
             $cp = new Permissions(Page::getCurrentPage());
             if ($cp->canViewToolbar()) {
