@@ -7,7 +7,7 @@
         <div class="form-group mb-3">
           <label class="control-label form-label"><?php echo t('Enable Use CDN'); ?></label>
           <div class="checkbox form-check"><?php echo $form->checkbox('CDN_ENABLED', 1, $CDN_ENABLED); ?><?php echo $form->label('CDN_ENABLED', t('Enable CDN Support')); ?><br>
-<?php echo t('Note: this plugin uses RegEx replace to manipulate HTML and may result in higher Time To First Byte (TTFB).  Additionally, it will not work in all cases such as dynamic assets loading or referencing of static assets by "url()" inside of CSS file. Therefore, this plugin should only be use with Pull-Zone type of CDN where content must be available at origin. We recommend that you use Concrete5 FlySystem driver to integrate into S3 or Push-Zone CDN for remote FTP.  For popular sites, this plugin help improve/alleviate traffic congestion by serving static content from Offsite/CDN.'); ?>
+<?php echo t('Note: this plugin uses RegEx replace to manipulate HTML and may result in higher Time To First Byte (TTFB).  Additionally, it will not work in all cases such as dynamic assets loading or referencing of static assets by "url()" inside of CSS file. Therefore, this plugin should only be use with Pull-Zone type of CDN where content must be available at origin. We recommend that you use ConcreteCMS FlySystem driver to integrate into S3 or Push-Zone CDN for remote FTP.  For popular sites, this plugin help improve/alleviate traffic congestion by serving static content from Offsite/CDN.'); ?>
           </div>
         </div>
 

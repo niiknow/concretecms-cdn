@@ -1,6 +1,6 @@
 {
-    "name": "niiknow/concrete5-cdn",
-    "description": "Concrete5.7+ CDN plugin",
+    "name": "niiknow/concretecms-cdn",
+    "description": "ConcreteCMS v9+ CDN plugin",
     "type": "project",
     "minimum-stability": "dev",
     "prefer-stable": true,
