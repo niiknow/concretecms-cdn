@@ -5,6 +5,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.48"
     },
     "require": {
         "php" : ">=8",
@@ -20,7 +21,6 @@
     "scripts": {
         "phpcs": "phpcs -s --report=full --report=source",
         "phpcs:fix": "phpcbf -w",
-        "format": "./vendor/bin/php-cs-fixer fix --using-cache=no",
         "scope-dependencies": [
           "@php vendor/bin/php-scoper add-prefix --config=.scoper.inc.php --output-dir=niiknow_cdn/vendor --force --quiet"
         ],

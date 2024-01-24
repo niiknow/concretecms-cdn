@@ -53,8 +53,10 @@ class Controller extends Package
 
     public function setIncludePath($arg1 = 'application/files/,concrete/,fundamental/,download_file/,packages/')
     {
-        $this->getConfig()->save('niiknow_cdn.include_path',
-            str_replace(',', '|', preg_replace('/\s*/', '', $arg1)));
+        $this->getConfig()->save(
+            'niiknow_cdn.include_path',
+            str_replace(',', '|', preg_replace('/\s*/', '', $arg1))
+        );
     }
 
     public function getExcludeSubstrings()
@@ -65,8 +67,10 @@ class Controller extends Package
 
     public function setExcludeSubstrings($arg1 = '.php,.htm')
     {
-        $this->getConfig()->save('niiknow_cdn.exclude_substring',
-            str_replace(',', '|', preg_replace('/\s*/', '', $arg1)));
+        $this->getConfig()->save(
+            'niiknow_cdn.exclude_substring',
+            str_replace(',', '|', preg_replace('/\s*/', '', $arg1))
+        );
     }
 
     public function minifyHtml()
@@ -103,8 +107,11 @@ class Controller extends Package
     }
 
     // CSS Minifier => http://ideone.com/Q5USEF + improvement(s)
-    private function doCssMinify($input) {
-        if(trim($input) === "") return $input;
+    private function doCssMinify($input)
+    {
+        if (trim($input) === "") {
+            return $input;
+        }
         return preg_replace(
             array(
                 // Remove comment(s)
@@ -142,12 +149,16 @@ class Controller extends Package
                 '$1:0',
                 '$1$2'
             ),
-        $input);
+            $input
+        );
     }
 
     // JavaScript Minifier
-    private function doJsMinify($input) {
-        if(trim($input) === "") return $input;
+    private function doJsMinify($input)
+    {
+        if (trim($input) === "") {
+            return $input;
+        }
         return preg_replace(
             array(
                 // Remove comment(s)
@@ -168,7 +179,8 @@ class Controller extends Package
                 '$1$3',
                 '$1.$3'
             ),
-        $input);
+            $input
+        );
     }
 
     /**
@@ -177,25 +189,28 @@ class Controller extends Package
      * https://gist.github.com/Rodrigo54/93169db48194d470188f
      * -----------------------------------------------------------------------------------------
      */
-    public function doHtmlMinify($input) {
-        if(trim($input) === "") return $input;
+    public function doHtmlMinify($input)
+    {
+        if (trim($input) === "") {
+            return $input;
+        }
 
         // Remove extra white-space(s) between HTML attribute(s)
-        $input = preg_replace_callback('#<([^\/\s<>!]+)(?:\s+([^<>]*?)\s*|\s*)(\/?)>#s', function($matches) {
+        $input = preg_replace_callback('#<([^\/\s<>!]+)(?:\s+([^<>]*?)\s*|\s*)(\/?)>#s', function ($matches) {
             return '<' . $matches[1] . preg_replace('#([^\s=]+)(\=([\'"]?)(.*?)\3)?(\s+|$)#s', ' $1$2', $matches[2]) . $matches[3] . '>';
         }, str_replace("\r", "", $input));
 
         // minify inline style and script tags
-        if(strpos($input, '</style>') !== false) {
-          $input = preg_replace_callback('#<style(.*?)>(.*?)</style>#is', function($matches) {
-            return '<style' . $matches[1] .'>'. $this->doCssMinify($matches[2]) . '</style>';
-          }, $input);
+        if (strpos($input, '</style>') !== false) {
+            $input = preg_replace_callback('#<style(.*?)>(.*?)</style>#is', function ($matches) {
+                return '<style' . $matches[1] .'>'. $this->doCssMinify($matches[2]) . '</style>';
+            }, $input);
         }
 
-        if(strpos($input, '</script>') !== false) {
-          $input = preg_replace_callback('#<script(.*?)>(.*?)</script>#is', function($matches) {
-            return '<script' . $matches[1] .'>'. $this->doJsMinify($matches[2]) . '</script>';
-          }, $input);
+        if (strpos($input, '</script>') !== false) {
+            $input = preg_replace_callback('#<script(.*?)>(.*?)</script>#is', function ($matches) {
+                return '<script' . $matches[1] .'>'. $this->doJsMinify($matches[2]) . '</script>';
+            }, $input);
         }
 
         return preg_replace(
@@ -229,7 +244,8 @@ class Controller extends Package
                 '$1',
                 ""
             ),
-        $input);
+            $input
+        );
     }
 
     public function on_start()
